@@ -1,0 +1,31 @@
+# Node.js
+node_modules/
+npm-debug.log*
+.env*
+
+# Logs
+logs/
+*.log
+
+# Dependency directories
+pids/
+*.pid
+*.pid.lock
+
+# Optional npm cache directory
+.npm/
+
+# Optional ESLint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Build artifacts (if applicable)
+dist/
+build/
+
+# IDE and OS generated files
+.DS_Store
+.vscode/
+.idea/
