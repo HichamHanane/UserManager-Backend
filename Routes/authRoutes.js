@@ -6,7 +6,7 @@ const { userRegister } = require('../Controllers/userController');
 const validateUserInputs = [
     body('name').isString().withMessage('name must be a string '),
     body('email').isEmail().withMessage('email must be a valide email'),
-    body('password').isLength({ min: 8 }).withMessage('password must be at least 6 characters'),
+    body('password').isString().withMessage('password must be a string ').isLength({ min: 8 }).withMessage('password must be at least 8 characters'),
 ]
 
 router.post('/register', validateUserInputs,userRegister);
