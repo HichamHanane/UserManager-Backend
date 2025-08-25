@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-
+const User = require('./Models/User');
 mongoose.connect(process.env.DB_URL)
 .then(
     console.log('database connected successfully...')
