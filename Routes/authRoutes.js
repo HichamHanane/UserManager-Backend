@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
-const { userRegister, userLogin } = require('../Controllers/userController');
+const { userRegister, userLogin,getProfile,checkAuth,logout} = require('../Controllers/userController');
+const verifyToken  = require('../Middleware/verifyToken');
 
 const validateUserInputs = [
     body('name').isString().withMessage('name must be a string '),
@@ -12,6 +13,12 @@ const validateUserInputs = [
 router.post('/register', validateUserInputs,userRegister);
 
 router.post('/login',userLogin)
+
+router.post('/logout',logout)
+
+router.get('/profile',verifyToken,getProfile)
+
+router.get('/check-token',verifyToken,checkAuth); 
 
 
 module.exports = router;

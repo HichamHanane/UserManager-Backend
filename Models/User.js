@@ -9,7 +9,8 @@ const userSchema = new schema({
     },
     email:{
         type:String,
-        required:true
+        required:true,
+        unique:true,    
     },
     password:{
         type:String,
@@ -17,7 +18,6 @@ const userSchema = new schema({
     },
     role:{
         type:String,
-        enum:['user','admin'],
         default:'user'
         // required:true
     },
