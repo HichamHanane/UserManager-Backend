@@ -65,7 +65,12 @@ const userLogin = async (req, res) => {
         }
 
         let token = jtw.sign({ user_id: user._id }, "hicham@123",{expiresIn:"1d"});
+        res.cookie('token',token,{
+            httpOnly:true,
+            secure:false,
+            maxAge:1*24*60*60*1000
 
+        });
         return res.status(200).json({
             message: "You loggedin successfully",
             token
