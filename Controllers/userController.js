@@ -1,8 +1,8 @@
 const { validationResult } = require('express-validator');
 const User = require('../Models/User');
-const { hash } = require('bcrypt');
+const bcrypt = require('bcrypt');
 
-
+const jtw = require('jsonwebtoken');
 
 
 const userRegister = async (req, res) => {
@@ -16,7 +16,7 @@ const userRegister = async (req, res) => {
         }
 
         let newUser = new User;
-        let hashedPassword = await hash(password, 10);
+        let hashedPassword = await bcrypt.hash(password, 10);
 
         newUser.name = name;
         newUser.email = email;
@@ -39,5 +39,44 @@ const userRegister = async (req, res) => {
     }
 }
 
+const userLogin = async (req, res) => {
+    let { email, password } = req.body;
+    console.log('---Login Body request :',req.body);
+    
+    try {
+        let user = await User.findOne({ email });
+        console.log('user',user);
+        
+        if (!user) {
+            res.status(400).json({
+                message: 'user not found'
+            })
+            return;
+        }
 
-module.exports = { userRegister };
+        const isMatch = await bcrypt.compare(password, user.password);
+        console.log('is Match :',isMatch);
+        
+        if (!isMatch) {
+            res.status(400).json({
+                message: "password or email incorrect"
+            })
+            return;
+        }
+
+        let token = jtw.sign({ user_id: user._id }, "hicham@123",{expiresIn:"1d"});
+
+        return res.status(200).json({
+            message: "You loggedin successfully",
+            token
+        })
+
+
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+module.exports = { userRegister, userLogin };

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
-const { userRegister } = require('../Controllers/userController');
+const { userRegister, userLogin } = require('../Controllers/userController');
 
 const validateUserInputs = [
     body('name').isString().withMessage('name must be a string '),
@@ -10,6 +10,8 @@ const validateUserInputs = [
 ]
 
 router.post('/register', validateUserInputs,userRegister);
+
+router.post('/login',userLogin)
 
 
 module.exports = router;
