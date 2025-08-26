@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const authRoutes = require('./Routes/authRoutes');
+const userRoutes = require('./Routes/userRouts');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
@@ -26,6 +27,7 @@ mongoose.connect(process.env.DB_URL)
 
 
 app.use('/api',authRoutes);
+app.use('/api',userRoutes);
 
 
 
