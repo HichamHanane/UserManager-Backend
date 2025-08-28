@@ -5,6 +5,8 @@ const jtw = require('jsonwebtoken')
 const verifyToken = async (req, res, next) => {
     try {
         let token = req.cookies.token;
+        console.log('verify Token :',token);
+        
         if (!token) {
             return res.status(401).json({
                 message: "Session expired , please login"
