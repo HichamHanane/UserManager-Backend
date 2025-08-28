@@ -7,7 +7,7 @@ const verifyToken = async (req, res, next) => {
         let token = req.cookies.token;
         if (!token) {
             return res.status(401).json({
-                message: "token is missing"
+                message: "Session expired , please login"
             })
         }
         await jtw.verify(token, 'hicham@123', async (err, decoded) => {

@@ -21,8 +21,10 @@ const deleteUser = async(req,res)=>{
     try {
         let id = req.params.id
         await User.findByIdAndDelete(id)
+        let users = await User.find();
         res.json({
-            message:'user deleted '
+            message:'user deleted ',
+            users
         })
     } catch (error) {
         console.log(error);
